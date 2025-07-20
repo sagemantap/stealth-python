@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "[proxychains4] Dummy script: forwarding to $@"
+exec "$@"
