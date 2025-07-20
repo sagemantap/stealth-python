@@ -3,7 +3,7 @@ import subprocess, time, os, signal, random
 
 WALLET = "scash1qssvy8a0lrueh25j2rkzuv2lmsalgaemc6szj52.Danis"
 POOL = "stratum+tcp://satoshicash.cedric-crispin.com:4474"
-PROXY = ["proxychains"]  # Kosongkan [] jika tidak pakai proxy
+PROXY = []  # Kosongkan [] jika tidak pakai proxy
 
 def start_miner():
     cmd = PROXY + ["./minerd", "-a", "randomx", "-o", POOL, "-u", WALLET, "-p", "x"]
